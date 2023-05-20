@@ -13,7 +13,7 @@ class UserService implements ServiceInterface
    }
    public function getPaginate(int $number)
    {
-      return User::paginate($number)->get();
+      return User::paginate($number);
    }
    public function getFirst($value, $column = 'id',)
    {

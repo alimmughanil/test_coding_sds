@@ -14,7 +14,7 @@ class ArticleService implements ServiceInterface
    }
    public function getPaginate(int $number)
    {
-      return Article::paginate($number)->get();
+      return Article::paginate($number);
    }
    public function getFirst($value, $column = "id")
    {
