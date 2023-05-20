@@ -25,6 +25,7 @@ export default {
                         "[data-theme=light]"
                     ],
                     primary: "blue",
+                    error: "red",
                     "primary-focus": "mediumblue",
                     "--btn-text-case": "normal",
                 },
