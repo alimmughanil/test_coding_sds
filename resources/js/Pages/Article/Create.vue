@@ -62,7 +62,7 @@ const setSlug = (e) => {
                     </div>
                     <div class="form-control w-full">
                         <label class="label">
-                            <span class="label-text">Name</span>
+                            <span class="label-text">Title</span>
                         </label>
                         <input
                             type="text"

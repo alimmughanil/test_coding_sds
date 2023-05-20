@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Auth;
+namespace App\Http\Services\User;
 
 use App\Models\User;
 use App\Http\Services\ServiceInterface;
@@ -15,7 +15,7 @@ class UserService implements ServiceInterface
    {
       return User::paginate($number)->get();
    }
-   public function getFirst($column = 'id', $value)
+   public function getFirst($value, $column = 'id',)
    {
       return User::where($column, $value)->first();
    }
@@ -25,13 +25,13 @@ class UserService implements ServiceInterface
    }
    public function update($id, array $request)
    {
-      $existUser = $this->getById($id);
+      $existUser = $this->getFirst($id);
       if (!$existUser) return null;
       return User::where('id', $id)->update($request);
    }
    public function delete($id)
    {
-      $existUser = $this->getById($id);
+      $existUser = $this->getFirst($id);
       if (!$existUser) return null;
       return User::where('id', $id)->delete();
    }

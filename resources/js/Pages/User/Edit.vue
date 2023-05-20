@@ -3,129 +3,107 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm, usePage } from "@inertiajs/vue3";
 
 const categories = usePage().props.categories;
-const article = usePage().props.article;
+const user = usePage().props.user;
 
 const form = useForm({
     _method: "PUT",
-    category_id: article.category_id,
-    title: article.title,
-    slug: article.slug,
-    content: article.content,
-    banner: article.banner,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    password: null,
 });
 </script>
 
 <template>
-    <Head title="Article" />
+    <Head name="User" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"
             >
-                Article
+                User
             </h2>
         </template>
         <div class="flex justify-center py-6 flex-col items-center gap-4">
             <div
                 class="btn btn-sm btn-primary w-max btn-outline cursor-default"
             >
-                Edit Article
+                Edit User
             </div>
             <div class="w-full md:max-w-md">
-                <form @submit.prevent="form.post(`/article/${article.id}`)">
+                <form @submit.prevent="form.post(`/user/${user.id}`)">
                     <div class="form-control w-full">
                         <label class="label">
-                            <span class="label-text">Category</span>
+                            <span class="label-text">Name</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            class="input input-bordered w-full"
+                            v-model="form.name"
+                        />
+                        <label class="label">
+                            <span
+                                class="label-text-alt text-error"
+                                v-if="form.errors.name"
+                                >{{ form.errors.name }}</span
+                            >
+                        </label>
+                    </div>
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input
+                            type="email"
+                            placeholder="Type here"
+                            class="input input-bordered w-full"
+                            v-model="form.email"
+                        />
+                        <label class="label">
+                            <span
+                                class="label-text-alt text-error"
+                                v-if="form.errors.email"
+                                >{{ form.errors.email }}</span
+                            >
+                        </label>
+                    </div>
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Type here"
+                            class="input input-bordered w-full"
+                            v-model="form.password"
+                        />
+                        <label class="label">
+                            <span
+                                class="label-text-alt text-error"
+                                v-if="form.errors.password"
+                                >{{ form.errors.password }}</span
+                            >
+                        </label>
+                    </div>
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Role</span>
                         </label>
                         <select
-                            v-model="form.category_id"
+                            v-model="form.role"
                             class="select select-bordered w-full"
                         >
-                            <option selected value="">Choose Category</option>
-                            <option
-                                v-for="category in categories"
-                                :value="category.id"
-                            >
-                                {{ category.name }}
-                            </option>
+                            <option selected value="">Choose Role</option>
+                            <option value="Author">Author</option>
+                            <option value="Admin">Admin</option>
                         </select>
                         <label class="label">
                             <span
                                 class="label-text-alt text-error"
-                                v-if="form.errors.category_id"
-                                >{{ form.errors.category_id }}</span
-                            >
-                        </label>
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Title</span>
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Type here"
-                            class="input input-bordered w-full"
-                            v-model="form.title"
-                        />
-                        <label class="label">
-                            <span
-                                class="label-text-alt text-error"
-                                v-if="form.errors.title"
-                                >{{ form.errors.title }}</span
-                            >
-                        </label>
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Slug</span>
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Auto Type From Title"
-                            class="input input-bordered w-full"
-                            v-model="form.slug"
-                        />
-                        <label class="label">
-                            <span
-                                class="label-text-alt text-error"
-                                v-if="form.errors.slug"
-                                >{{ form.errors.slug }}</span
-                            >
-                        </label>
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Content</span>
-                        </label>
-                        <textarea
-                            class="textarea textarea-bordered textarea-lg"
-                            placeholder="Type here"
-                            v-model="form.content"
-                        ></textarea>
-                        <label class="label">
-                            <span
-                                class="label-text-alt text-error"
-                                v-if="form.errors.content"
-                                >{{ form.errors.content }}</span
-                            >
-                        </label>
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Banner</span>
-                        </label>
-                        <input
-                            type="file"
-                            placeholder="Type here"
-                            class="file-input file-input-bordered w-full"
-                            @input="form.banner = $event.target.files[0]"
-                        />
-                        <label class="label">
-                            <span
-                                class="label-text-alt text-error"
-                                v-if="form.errors.banner"
-                                >{{ form.errors.banner }}</span
+                                v-if="form.errors.role"
+                                >{{ form.errors.role }}</span
                             >
                         </label>
                     </div>

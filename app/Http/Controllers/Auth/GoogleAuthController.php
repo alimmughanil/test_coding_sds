@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Services\Auth\UserService;
-use App\Http\Services\ServiceInterface;
+use App\Http\Services\User\UserService;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 

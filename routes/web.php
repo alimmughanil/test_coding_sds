@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Category\CategoryController;
 
@@ -27,6 +28,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware('auth')->name('dashboard');
+
+Route::resource('/user', UserController::class)->middleware('auth', 'isAdmin');
 
 Route::middleware('auth')->group(function () {
     Route::resource('/category', CategoryController::class);
