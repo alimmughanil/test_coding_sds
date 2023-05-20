@@ -13,7 +13,7 @@ class CategoryService implements ServiceInterface
    }
    public function getPaginate(int $number)
    {
-      return Category::paginate($number)->get();
+      return Category::paginate($number);
    }
    public function getFirst($value, $column = "id")
    {

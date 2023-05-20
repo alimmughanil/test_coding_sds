@@ -1,6 +1,6 @@
 ### Tech Stack
 
--   Laravel
+-   Laravel 10
     -   Breeze for Auth
     -   Eloquent for ORM
 -   Inertia
