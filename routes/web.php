@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Category\CategoryController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -26,12 +27,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return auth()->user()->role == 'Admin'
-        ? Inertia::render('Admin/Dashboard/Index')
-        : Inertia::render('Author/Dashboard/Index');
+    return Inertia::render('Dashboard');
 })->middleware('auth')->name('dashboard');
 
-Route::middleware('auth', 'isAdmin')->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::resource('/category', CategoryController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
