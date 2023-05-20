@@ -20,6 +20,15 @@ class ArticleService implements ServiceInterface
    {
       return Article::where($column, $value)->first();
    }
+   public function getSearch($searchValue, $filterValue, $searchColumn = "title", $filterColumn = "slug")
+   {
+      return Article::where($searchColumn, 'LIKE', '%' . $searchValue . '%')
+         ->whereHas('category', function ($query) use ($filterColumn, $filterValue) {
+            return $query->where($filterColumn, $filterValue);
+         })
+         ->orderBy('created_at', 'DESC')
+         ->get();
+   }
    public function create(array $request)
    {
       return Article::create($request);

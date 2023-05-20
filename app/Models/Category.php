@@ -10,7 +10,6 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['article'];
 
     public function article()
     {
