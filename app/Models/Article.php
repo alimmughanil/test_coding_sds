@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Article extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['article'];
+    protected $with = ['category'];
 
-    public function article()
+    public function category()
     {
-        return $this->belongsTo(Article::class, 'category_id', 'id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }
