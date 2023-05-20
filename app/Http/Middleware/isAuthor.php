@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class isUser
+class isAuthor
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class isUser
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->check()) return redirect('/login');
-        if (!auth()->user()->role === 0) return abort(403);
+        if (!auth()->user()->role === 'Author') return abort(403);
         return $next($request);
     }
 }

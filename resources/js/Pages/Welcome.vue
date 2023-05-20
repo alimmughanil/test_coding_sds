@@ -25,28 +25,27 @@ defineProps({
         className="min-h-screen flex flex-col justify-center items-center gap-2"
     >
         <p>Selamat datang</p>
-        <div className="flex gap-4">
-            <div v-if="canLogin" class="">
-                <Link
-                    v-if="$page.props.auth.user"
-                    :href="route('dashboard')"
-                    class="btn btn-sm btn-primary"
-                    >Dashboard</Link
+        <div v-if="canLogin" class="flex gap-4">
+            <Link
+                v-if="$page.props.auth.user"
+                :href="route('dashboard')"
+                class="btn btn-sm btn-primary"
+                >Dashboard</Link
+            >
+
+            <template v-else>
+                <Link :href="route('login')" class="btn btn-sm btn-primary"
+                    >Log in</Link
                 >
+                <a href="/auth/google/redirect" class="btn btn-sm">Google</a>
 
-                <template v-else>
-                    <Link :href="route('login')" class="btn btn-sm btn-primary"
-                        >Log in</Link
-                    >
-
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                        class="ml-4 btn btn-sm btn-primary btn-outline"
-                        >Register</Link
-                    >
-                </template>
-            </div>
+                <Link
+                    v-if="canRegister"
+                    :href="route('register')"
+                    class="btn btn-sm btn-primary btn-outline"
+                    >Register</Link
+                >
+            </template>
         </div>
     </div>
 </template>
