@@ -24,8 +24,7 @@ class GoogleAuthController extends Controller
     {
         try {
             $user = Socialite::driver('google')->stateless()->user();
-            $existUser = $this->userService->getFirst('email', $user->email);
-
+            $existUser = $this->userService->getFirst($user->email, 'email');
             if (!$existUser) {
                 $store = User::create([
                     'name' => $user->name,
@@ -39,6 +38,7 @@ class GoogleAuthController extends Controller
             auth()->login($user, true);
             return redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('login');
         }
     }
